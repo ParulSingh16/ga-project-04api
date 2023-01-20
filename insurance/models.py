@@ -5,7 +5,7 @@ class Customer(models.Model):
     username = models.CharField(max_length=50)
     emailId = models.CharField(primary_key=True, max_length=300)
     password = models.CharField(max_length=10)
-    signupDate = models.DateField
+    # signupDate = models.DateField()
 
     # this function represents the class objects as a string in the admin app
 
@@ -13,13 +13,16 @@ class Customer(models.Model):
 class Partner(models.Model):
     pName = models.CharField(max_length=50)
     pCode = models.CharField(primary_key=True, max_length=5)
-    onboardingDate = models.DateField
+    onboardingDate = models.DateField()
 
 
 class Rate(models.Model):
     pCode = models.CharField(max_length=5)
-    productRate = models.IntegerField
-    insuranceRate = models.IntegerField
+    productRate = models.IntegerField()
+    insuranceRate = models.DecimalField(max_digits=5, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.pCode} - {self.productRate} - {self.insuranceRate}"
 
 
 class Policy(models.Model):
@@ -27,9 +30,9 @@ class Policy(models.Model):
     customerId = models.CharField(max_length=300)
     pCode = models.CharField(max_length=5)
     productName = models.CharField(max_length=100)
-    productRate = models.IntegerField
-    insuranceRate = models.IntegerField
-    policyDate = models.DateField
+    productRate = models.IntegerField()
+    insuranceRate = models.IntegerField()
+    policyDate = models.DateField()
     isClaimed = models.BooleanField(blank=False)
-    claimDate = models.DateField
+    claimDate = models.DateField()
     claimReason = models.CharField(max_length=10)
