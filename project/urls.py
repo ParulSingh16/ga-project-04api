@@ -19,10 +19,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/insurance/', include('insurance.urls')),
-    # path('api/register/', include('register.urls')),
-    # path('api/genres/', include('genres.urls')),
-    # path('api/comments/', include('comments.urls')),
-    # path('api/artists/', include('artists.urls')),
-    # path('api/auth/', include('jwt_auth.urls')),
+    path('api/partners/', include('partners.urls')),
+    path('api/policies/', include('policies.urls')),
+    path('api/auth/', include('jwt_auth.urls')),
+    path('api/purchased-policies/', include('purchased_policies.urls')),
 ]
