@@ -45,9 +45,12 @@ INSTALLED_APPS = [
     'jwt_auth',
     'purchased_policies',
     'rates',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -134,6 +137,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'jwt_auth.User'  # This will point to our User model
 
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+)
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
