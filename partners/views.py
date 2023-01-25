@@ -21,6 +21,7 @@ class PartnerListView(APIView):
     def post(self, request):
         request.data['owner'] = request.user.id
         partner_to_add = PartnerSerializer(data=request.data)
+        print(partner_to_add)
         try:
             partner_to_add.is_valid()
             partner_to_add.save()

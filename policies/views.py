@@ -1,6 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.exceptions import NotFound
+
 # This provides a default response for a not found
 # from rest_framework.exceptions import NotFound
 # this imports a Django core exception: ValidationError
@@ -12,13 +14,17 @@ from .serializers.populated import PopulatedPolicySerializer
 
 class PolicyListView(APIView):
 
-    def get(self, _request):
+    def get(self, request):
+        print(request)
         policies = Policy.objects.all()  # get all of the partners from the database
         serialized_policies = PopulatedPolicySerializer(policies, many=True)
+        print(serialized_policies.data)
         return Response(serialized_policies.data, status=status.HTTP_200_OK)
 
     def post(self, request):
+        print(request.data)
         policy_to_add = PolicySerializer(data=request.data)
+        print(policy_to_add)
         try:
             policy_to_add.is_valid()
             policy_to_add.save()
@@ -36,8 +42,25 @@ class PolicyListView(APIView):
         # AssertionError is a native python error
         # link: https://docs.python.org/3/library/exceptions.html#AssertionError
         except AssertionError as e:
-            return Response({"detail": str(e)}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+            return Response({"detail1": str(e)}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
         # If we leave it blank, (except:) then all exceptions will fall into it
         # We will add this as a fallback.
-        except:
-            return Response({"detail": "Unprocessable Entity"}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+        except Exception as e:
+            return Response({"detail_exception": str(e)}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+
+# to get the data based on the param passed in the url
+
+
+class PolicyDetailView(APIView):
+    def get_policy(self, name):
+        try:
+            return Policy.objects.get(name=name)
+        except Policy.DoesNotExist:
+
+            raise NotFound(detail="Can't find that policy!")
+
+    def get(self, _request, name):
+        policy = self.get_policy(name=name)
+        serialized_policy = PopulatedPolicySerializer(policy)
+        print(serialized_policy.data)
+        return Response(serialized_policy.data, status=status.HTTP_200_OK)

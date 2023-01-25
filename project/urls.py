@@ -23,4 +23,5 @@ urlpatterns = [
     path('api/policies/', include('policies.urls')),
     path('api/auth/', include('jwt_auth.urls')),
     path('api/purchased-policies/', include('purchased_policies.urls')),
+
 ]

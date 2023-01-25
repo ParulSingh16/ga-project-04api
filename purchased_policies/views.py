@@ -21,9 +21,10 @@ class PurchasedPolicyListView(APIView):
         return Response(serialized_purchased_policies.data, status=status.HTTP_200_OK)
 
     def post(self, request):
-        request.data['owner']
         print(request.data)
-        purchasedPolicy_to_add = PopulatedPurchasedPolicySerializer(
+        request.data['owner']
+
+        purchasedPolicy_to_add = PurchasedPolicySerializer(
             data=request.data)
         try:
             purchasedPolicy_to_add.is_valid()
@@ -45,8 +46,8 @@ class PurchasedPolicyListView(APIView):
             return Response({"detail": str(e)}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
         # If we leave it blank, (except:) then all exceptions will fall into it
         # We will add this as a fallback.
-        except:
-            return Response({"detail": "Unprocessable Entity"}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+        except Exception as e:
+            return Response({"detail": str(e)}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 
 class PurchasedPolicyDetailView(APIView):
