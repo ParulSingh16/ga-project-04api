@@ -1,0 +1,47 @@
+[
+{
+  "model": "partners.partner",
+  "pk": 1,
+  "fields": {
+    "name": "axa",
+    "code": "ax",
+    "onboarding_date": "2023-01-20"
+  }
+},
+{
+  "model": "partners.partner",
+  "pk": 2,
+  "fields": {
+    "name": "great parcels",
+    "code": "gp",
+    "onboarding_date": "2023-01-20"
+  }
+},
+{
+  "model": "partners.partner",
+  "pk": 3,
+  "fields": {
+    "name": "alian",
+    "code": "gp",
+    "onboarding_date": "2023-01-20"
+  }
+},
+{
+  "model": "partners.partner",
+  "pk": 4,
+  "fields": {
+    "name": "vinsure",
+    "code": "vi",
+    "onboarding_date": "2023-01-18"
+  }
+},
+{
+  "model": "partners.partner",
+  "pk": 5,
+  "fields": {
+    "name": "U Insure",
+    "code": "UI",
+    "onboarding_date": "2023-01-18"
+  }
+}
+]

@@ -1,0 +1,12 @@
+[
+{
+  "model": "purchased_policies.purchasedpolicy",
+  "pk": 1,
+  "fields": {
+    "policy": 1,
+    "owner": 2,
+    "insured_product": "laptop",
+    "insured_product_price": 1500
+  }
+}
+]
